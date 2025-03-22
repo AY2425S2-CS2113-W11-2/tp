@@ -7,9 +7,11 @@ public interface BudgetManager {
 
     void setBudget(String name, double amount);
 
-    void checkBudget();
+    void listBudgets();
 
     void deductFromBudget(int index, double amount);
 
     void addToBudget(int index, double amount);
+
+    void checkBudget(int index);
 }

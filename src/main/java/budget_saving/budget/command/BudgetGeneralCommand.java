@@ -1,15 +1,24 @@
 package budget_saving.budget.command;
 
+import budget_saving.budget.BudgetParser;
 import cashflow.command.Command;
 import cashflow.model.interfaces.BudgetManager;
 import java.util.Scanner;
 
 public class BudgetGeneralCommand implements Command {
+    public static final String LIST_BUDGET = "list";
+    public static final String SET_BUDGET = "set";
+    public static final String CHECK_BUDGET = "check";
+    public static final String DEDUCT_BUDGET = "deduct";
+    public static final String ADD_BUDGET = "add";
+
+
     private static final String BUDGET_COMMANDS =
-            "- set-budget n/BUDGET_NAME a/AMOUNT\n"
-                    + "- check-budget\n"
-                    + "- deduct-budget i/INDEX a/AMOUNT\n"
-                    + "- add-budget i/INDEX a/AMOUNT\n";
+                      "- " + SET_BUDGET + " n/BUDGET_NAME a/AMOUNT\n"
+                    + "- " + CHECK_BUDGET + "\n"
+                    + "- " + LIST_BUDGET + "\n"
+                    + "- " + DEDUCT_BUDGET + " i/INDEX a/AMOUNT\n"
+                    + "- " + ADD_BUDGET + " i/INDEX a/AMOUNT\n";
 
     private Command command;
 
@@ -27,22 +36,17 @@ public class BudgetGeneralCommand implements Command {
      * @param budgetManager the budget manager to operate on.
      */
     public BudgetGeneralCommand(String input, BudgetManager budgetManager) {
-        if (input.trim().equalsIgnoreCase("budget")) {
-            Scanner scanner = new Scanner(System.in);
-            System.out.print(BUDGET_COMMANDS + "Enter budget command: ");
-            input = scanner.nextLine().trim();
-        }
-        input = input.trim();
-        String lowerInput = input.toLowerCase();
         try {
-            if (lowerInput.startsWith("set-budget")) {
-                command = parseSetBudgetCommand(input, budgetManager);
-            } else if (lowerInput.startsWith("check-budget")) {
-                command = parseCheckBudgetCommand(budgetManager);
-            } else if (lowerInput.startsWith("deduct-budget")) {
-                command = parseDeductBudgetCommand(input, budgetManager);
-            } else if (lowerInput.startsWith("add-budget")) {
-                command = parseAddBudgetCommand(input, budgetManager);
+            if (input.startsWith(SET_BUDGET)) {
+                command = BudgetParser.parseSetBudgetCommand(input, budgetManager);
+            } else if (input.startsWith(DEDUCT_BUDGET)) {
+                command = BudgetParser.parseDeductBudgetCommand(input, budgetManager);
+            } else if (input.startsWith(ADD_BUDGET)) {
+                command = BudgetParser.parseAddBudgetCommand(input, budgetManager);
+            } else if (input.startsWith(LIST_BUDGET)) {
+                command = BudgetParser.parseListBudgetCommand(budgetManager);
+            } else if (input.startsWith(CHECK_BUDGET)) {
+                command = BudgetParser.parseCheckBudgetCommand(input, budgetManager);
             } else {
                 System.out.println("Unknown budget command.");
             }
@@ -53,56 +57,6 @@ public class BudgetGeneralCommand implements Command {
         }
     }
 
-    private static Command parseSetBudgetCommand(String input, BudgetManager budgetManager)
-            throws NumberFormatException {
-        // Expected format: set-budget n/BUDGET_NAME a/AMOUNT
-        int nIndex = input.indexOf("n/");
-        int aIndex = input.indexOf("a/");
-        if (nIndex == -1 || aIndex == -1) {
-            throw new IllegalArgumentException("Invalid set-budget command format. " +
-                    "Expected: set-budget n/BUDGET_NAME a/AMOUNT");
-        }
-        String name = input.substring(nIndex + 2, aIndex).trim();
-        String amountStr = input.substring(aIndex + 2).trim();
-        double amount = Double.parseDouble(amountStr);
-        return new SetBudgetCommand(budgetManager, name, amount);
-    }
-
-
-    private static Command parseCheckBudgetCommand(BudgetManager budgetManager) {
-        // Expected format: check-budget (no extra parameters)
-        return new CheckBudgetCommand(budgetManager);
-    }
-
-    private static Command parseDeductBudgetCommand(String input, BudgetManager budgetManager)
-            throws NumberFormatException {
-        // Expected format: deduct-budget i/INDEX a/AMOUNT
-        int iIndex = input.indexOf("i/");
-        int aIndex = input.indexOf("a/");
-        if (iIndex == -1 || aIndex == -1) {
-            throw new IllegalArgumentException("Invalid deduct-budget command format.");
-        }
-        String indexStr = input.substring(iIndex + 2, aIndex).trim();
-        String amountStr = input.substring(aIndex + 2).trim();
-        int index = Integer.parseInt(indexStr);
-        double amount = Double.parseDouble(amountStr);
-        return new DeductFromBudgetCommand(budgetManager, index, amount);
-    }
-
-    private static Command parseAddBudgetCommand(String input, BudgetManager budgetManager)
-            throws NumberFormatException {
-        // Expected format: add-budget n/BUDGET_NAME a/AMOUNT
-        int iIndex = input.indexOf("i/");
-        int aIndex = input.indexOf("a/");
-        if (iIndex == -1 || aIndex == -1) {
-            throw new IllegalArgumentException("Invalid add-budget command format.");
-        }
-        String indexStr = input.substring(iIndex + 2, aIndex).trim();
-        String amountStr = input.substring(aIndex + 2).trim();
-        int index = Integer.parseInt(indexStr);
-        double amount = Double.parseDouble(amountStr);
-        return new AddToBudgetCommand(budgetManager, index, amount);
-    }
 
     @Override
     public void execute() {
@@ -110,6 +64,19 @@ public class BudgetGeneralCommand implements Command {
             command.execute();
         } catch (Exception e) {
             System.err.println("An error has occurred when executing the budget command.");
+        }
+    }
+
+    //the 'main' function to all budget commands
+    public static void handleBudgetCommand(Scanner scanner, BudgetManager budgetManager) {
+        while (true){
+            System.out.print("Here's a list of budget commands: \n" + BUDGET_COMMANDS + "Enter budget command: ");
+            String input = scanner.nextLine().trim();
+            if (input.startsWith("exit")) {
+                break;
+            }
+            BudgetGeneralCommand command = new BudgetGeneralCommand(input, budgetManager);
+            command.execute();
         }
     }
 }

@@ -23,6 +23,8 @@ import utils.people.Person;
 
 import java.util.Scanner;
 
+import static budget_saving.budget.command.BudgetGeneralCommand.handleBudgetCommand;
+
 public class UI {
     private FinanceData data;
     private SavingList savingList;
@@ -69,7 +71,7 @@ public class UI {
                 new SavingGeneralCommand(input, savingList).execute();
                 break;
             case "budget":
-                new BudgetGeneralCommand(input, budgetList).execute();
+                handleBudgetCommand(scanner, budgetList);
                 break;
             case "expense":
                 handleExpenseCommands(scanner);

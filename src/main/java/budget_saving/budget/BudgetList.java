@@ -39,20 +39,21 @@ public class BudgetList implements BudgetManager {
         Budget newBudget = new Budget(name, money);
         try {
             addBudget(newBudget);
-            System.out.println("New budget added: " + newBudget.toString());
+            System.out.println("New budget added: " + newBudget);
         } catch (BudgetException e) {
             System.err.println("Error adding new budget: " + e.getMessage());
         }
     }
 
     @Override
-    public void checkBudget() {
+    public void listBudgets() {
         if (budgets.isEmpty()) {
             System.out.println("No budgets available.");
         } else {
+            System.out.println("Budget list:");
             for (int i = 0; i < budgets.size(); i++) {
                 Budget b = budgets.get(i);
-                System.out.println(b.toString());
+                System.out.println("Budget " + (i + 1) + ". " + b.toString());
             }
         }
     }
@@ -79,5 +80,34 @@ public class BudgetList implements BudgetManager {
         b.add(amount);
         System.out.println("Budget added");
         System.out.println(b.toString());
+    }
+
+    //returns the index of the budget, so it could be easily referenced
+    public int findBudgetIndex(Budget budget) {
+        for (int i = 0; i < budgets.size(); i++) {
+            Budget b = budgets.get(i);
+            if (b.equals(budget)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void modifyBudget(int index, String name, double amount) throws BudgetException {
+        if (index < 0 || index >= budgets.size()) {
+            throw new BudgetException("Index out of range.");
+        }
+        Budget b = budgets.get(index);
+        b.modifyBudget(amount, name);
+    }
+
+    //to list out all the expenses within the budget
+    //incorporate it in command
+    public void checkBudget(int index) {
+        if (index < 0 || index >= budgets.size()) {
+            System.out.println("Index out of range.");
+            return;
+        }
+        System.out.println(budgets.get(index).toStringWithExpenses());
     }
 }

@@ -3,17 +3,16 @@ package budget_saving.budget.command;
 import cashflow.command.Command;
 import cashflow.model.interfaces.BudgetManager;
 
-public class CheckBudgetCommand implements Command {
+public class ListBudgetCommand implements Command {
     private BudgetManager budgetManager;
-    private int index;
 
-    public CheckBudgetCommand(int index, BudgetManager budgetManager) {
+    public ListBudgetCommand(BudgetManager budgetManager) {
         this.budgetManager = budgetManager;
-        this.index = index;
     }
 
     @Override
     public void execute() {
-        budgetManager.checkBudget(index);
+        budgetManager.listBudgets();
     }
 }
+
