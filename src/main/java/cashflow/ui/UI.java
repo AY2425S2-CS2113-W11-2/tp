@@ -1,11 +1,11 @@
 package cashflow.ui;
 
-import budget_saving.budget.BudgetList;
+import budgetsaving.budget.BudgetList;
 import cashflow.command.HelpCommand;
 import cashflow.command.OverviewCommand;
 import cashflow.model.FinanceData;
-import budget_saving.saving.SavingList;
-import budget_saving.saving.command.SavingGeneralCommand;
+import budgetsaving.saving.SavingList;
+import budgetsaving.saving.command.SavingGeneralCommand;
 
 import expenseincome.expense.ExpenseCommandParser;
 import expenseincome.expense.commands.ExpenseCommand;
@@ -19,7 +19,7 @@ import loanbook.loanbook.commands.LoanCommand;
 
 import java.util.Scanner;
 
-import static budget_saving.budget.command.BudgetGeneralCommand.handleBudgetCommand;
+import static budgetsaving.budget.command.BudgetGeneralCommand.handleBudgetCommand;
 
 public class UI {
     private FinanceData data;

@@ -1,7 +1,7 @@
-package budget_saving.saving.command;
+package budgetsaving.saving.command;
 
 import cashflow.command.Command;
-import budget_saving.saving.SavingList;
+import budgetsaving.saving.SavingList;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import utils.money.Money;

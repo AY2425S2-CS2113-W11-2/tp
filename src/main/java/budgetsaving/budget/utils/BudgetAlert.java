@@ -1,4 +1,4 @@
-package budget_saving.budget.utils;
+package budgetsaving.budget.utils;
 
 public class BudgetAlert {
     public static final String BUDGET_ALERT = BudgetTextColour.RED +

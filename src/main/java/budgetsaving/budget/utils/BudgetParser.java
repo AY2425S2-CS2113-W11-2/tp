@@ -1,20 +1,17 @@
-package budget_saving.budget.utils;
+package budgetsaving.budget.utils;
 
-import budget_saving.budget.command.*;
+import budgetsaving.budget.command.AddToBudgetCommand;
+import budgetsaving.budget.command.ModifyBudgetCommand;
+import budgetsaving.budget.command.CheckBudgetCommand;
+import budgetsaving.budget.command.DeductFromBudgetCommand;
+import budgetsaving.budget.command.ListBudgetCommand;
+import budgetsaving.budget.command.SetBudgetCommand;
 import cashflow.command.Command;
 import cashflow.model.interfaces.BudgetManager;
 
 import java.time.LocalDate;
 
 public class BudgetParser {
-
-//    public static Command parseSetBudgetCommand(String input, BudgetManager budgetManager)
-//            throws NumberFormatException {
-//        BudgetAttributes attributes = new BudgetAttributes(input);
-//        String name = attributes.getName();
-//        double amount = attributes.getAmount();
-//        return new SetBudgetCommand(budgetManager, name, amount);
-//    }
 
     public static Command parseSetBudgetCommand(String input, BudgetManager budgetManager)
             throws NumberFormatException {

@@ -1,8 +1,8 @@
-package budget_saving.budget.command;
+package budgetsaving.budget.command;
 
-import budget_saving.budget.BudgetException;
-import budget_saving.budget.utils.BudgetParser;
-import budget_saving.budget.utils.BudgetTextColour;
+import budgetsaving.budget.BudgetException;
+import budgetsaving.budget.utils.BudgetParser;
+import budgetsaving.budget.utils.BudgetTextColour;
 import cashflow.command.Command;
 import cashflow.model.interfaces.BudgetManager;
 import java.util.Scanner;
@@ -58,8 +58,7 @@ public class BudgetGeneralCommand implements Command {
                 command = BudgetParser.parseCheckBudgetCommand(input, budgetManager);
             } else if (input.startsWith(MODIFY_BUDGET)) {
                 command = BudgetParser.parseModifyBudgetCommand(input, budgetManager);
-            }
-            else {
+            } else {
                 System.out.println("Unknown budget command.");
             }
         } catch (NumberFormatException e) {

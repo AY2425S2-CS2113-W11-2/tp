@@ -1,8 +1,8 @@
-package budget_saving.saving.command;
+package budgetsaving.saving.command;
 
 import cashflow.command.Command;
 import utils.money.Money;
-import budget_saving.saving.SavingList;
+import budgetsaving.saving.SavingList;
 
 public class ContributeGoalCommand implements Command {
     private SavingList savingList;

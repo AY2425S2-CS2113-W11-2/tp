@@ -1,6 +1,6 @@
-package budget_saving.budget;
+package budgetsaving.budget;
 
-import budget_saving.budget.utils.BudgetAlert;
+import budgetsaving.budget.utils.BudgetAlert;
 import cashflow.model.interfaces.BudgetManager;
 import expenseincome.expense.Expense;
 import utils.money.Money;
@@ -57,9 +57,12 @@ public class BudgetList implements BudgetManager {
         } catch (BudgetException e) {
             System.err.println("Error adding new budget: " + e.getMessage());
         }
-        assert budgets.size() == initialSize + 1 : "Budget list size did not increase.";
-        assert budgets.get(budgets.size() - 1).equals(newBudget) : "Last budget is not the newly added one.";
-        assert budgetByCategory.get(newBudget.getCategory()).equals(newBudget) : "Budget hash mapping not updated properly.";
+        assert budgets.size() == initialSize + 1 :
+                "Budget list size did not increase.";
+        assert budgets.get(budgets.size() - 1).equals(newBudget) :
+                "Last budget is not the newly added one.";
+        assert budgetByCategory.get(newBudget.getCategory()).equals(newBudget) :
+                "Budget hash mapping not updated properly.";
     }
 
 

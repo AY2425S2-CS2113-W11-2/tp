@@ -1,7 +1,7 @@
 package cashflow.model.interfaces;
 
-import budget_saving.budget.Budget;
-import budget_saving.budget.BudgetException;
+import budgetsaving.budget.Budget;
+import budgetsaving.budget.BudgetException;
 
 import java.time.LocalDate;
 
@@ -10,7 +10,7 @@ import java.time.LocalDate;
  */
 public interface BudgetManager {
 
-    void setBudget(String name, double amount, LocalDate endDate, String Category);
+    void setBudget(String name, double amount, LocalDate endDate, String category);
 
     Budget getBudget(int index) throws BudgetException;
 
@@ -22,6 +22,6 @@ public interface BudgetManager {
 
     void checkBudget(int index);
 
-    void modifyBudget(int index, String name, double amount, LocalDate endDate, String Category)
+    void modifyBudget(int index, String name, double amount, LocalDate endDate, String category)
             throws BudgetException;
 }

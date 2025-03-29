@@ -1,4 +1,4 @@
-package budget_saving.budget.utils;
+package budgetsaving.budget.utils;
 
 import java.time.LocalDate;
 

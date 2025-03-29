@@ -1,4 +1,4 @@
-package budget_saving.budget;
+package budgetsaving.budget;
 
 import expenseincome.expense.Expense;
 import utils.money.Money;
@@ -159,9 +159,15 @@ public class Budget {
             double updatedRemaining = totalAmount - spent.doubleValue();
             setRemainingBudget(updatedRemaining);
         }
-        if (name != null) { this.name = name; }
-        if (endDate != null) { this.endDate = endDate; }
-        if (category != null) { this.category = category; }
+        if (name != null) {
+            this.name = name;
+        }
+        if (endDate != null) {
+            this.endDate = endDate;
+        }
+        if (category != null) {
+            this.category = category;
+        }
     }
 
 

@@ -1,7 +1,7 @@
-package budget_saving.budget.command;
+package budgetsaving.budget.command;
 
-import budget_saving.budget.Budget;
-import budget_saving.budget.BudgetException;
+import budgetsaving.budget.Budget;
+import budgetsaving.budget.BudgetException;
 import cashflow.command.Command;
 import cashflow.model.interfaces.BudgetManager;
 
@@ -18,12 +18,6 @@ public class ModifyBudgetCommand implements Command {
     private LocalDate endDate;
     private String category;
 
-    private void printSuccess(Budget budget) {
-        System.out.println(MODIFY_SUCCESS_MESSAGE);
-        System.out.println("The updated budget is: \n"
-                            + budget.toString());
-    }
-
     public ModifyBudgetCommand(BudgetManager budgetManager, int index, double amount,
                                String name, LocalDate endDate, String category) {
         this.index = index;
@@ -32,6 +26,12 @@ public class ModifyBudgetCommand implements Command {
         this.endDate = endDate;
         this.category = category;
         this.budgetManager = budgetManager;
+    }
+
+    private void printSuccess(Budget budget) {
+        System.out.println(MODIFY_SUCCESS_MESSAGE);
+        System.out.println("The updated budget is: \n"
+                + budget.toString());
     }
 
     @Override

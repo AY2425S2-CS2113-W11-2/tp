@@ -1,4 +1,4 @@
-package budget_saving.saving;
+package budgetsaving.saving;
 
 import cashflow.model.interfaces.SavingsManager;
 import java.time.LocalDate;

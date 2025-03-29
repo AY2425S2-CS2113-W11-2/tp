@@ -1,4 +1,4 @@
-package budget_saving.budget;
+package budgetsaving.budget;
 
 public class BudgetException extends Exception {
 

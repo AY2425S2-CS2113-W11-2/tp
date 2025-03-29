@@ -1,4 +1,4 @@
-package budget_saving.budget.utils;
+package budgetsaving.budget.utils;
 
 public class BudgetTextColour {
     public static final String RESET = "\u001B[0m";
